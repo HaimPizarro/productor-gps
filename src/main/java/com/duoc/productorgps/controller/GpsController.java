@@ -12,12 +12,33 @@ public class GpsController {
     @Autowired
     private GpsService gpsService;
 
-    // Endpoint para recibir datos: POST http://localhost:8081/api/gps/enviar
     @PostMapping("/enviar")
     public String enviarDatosGps(@RequestBody UbicacionBus ubicacion) {
-        // Llamamos al servicio para enviar a la cola
+        ubicacion.setAccion("CREAR");
+        
         gpsService.enviarUbicacion(ubicacion);
         
-        return "Coordenadas recibidas y enviadas a la cola correctamente: " + ubicacion.getPatente();
+        return "Solicitud de CREACIÓN enviada para patente: " + ubicacion.getPatente();
+    }
+
+    @PutMapping("/editar/{id}")
+    public String editarDatosGps(@PathVariable Long id, @RequestBody UbicacionBus ubicacion) {
+        ubicacion.setId(id);
+        ubicacion.setAccion("EDITAR");
+        
+        gpsService.enviarUbicacion(ubicacion);
+        
+        return "Solicitud de EDICIÓN enviada para el ID: " + id;
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarDatosGps(@PathVariable Long id) {
+        UbicacionBus ubicacion = new UbicacionBus();
+        ubicacion.setId(id);
+        ubicacion.setAccion("ELIMINAR");
+        
+        gpsService.enviarUbicacion(ubicacion);
+        
+        return "Solicitud de ELIMINACIÓN enviada para el ID: " + id;
     }
 }

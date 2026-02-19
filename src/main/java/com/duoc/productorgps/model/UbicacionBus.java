@@ -3,15 +3,16 @@ package com.duoc.productorgps.model;
 import java.io.Serializable;
 
 public class UbicacionBus implements Serializable {
+    private Long id;
+    private String accion;
+
     private String patente;
     private String fechaHora;
     private double latitud;
     private double longitud;
 
-    // Constructor vacío
     public UbicacionBus() {}
 
-    // Constructor con datos
     public UbicacionBus(String patente, String fechaHora, double latitud, double longitud) {
         this.patente = patente;
         this.fechaHora = fechaHora;
@@ -19,7 +20,12 @@ public class UbicacionBus implements Serializable {
         this.longitud = longitud;
     }
 
-    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getAccion() { return accion; }
+    public void setAccion(String accion) { this.accion = accion; }
+
     public String getPatente() { return patente; }
     public void setPatente(String patente) { this.patente = patente; }
 
@@ -34,6 +40,6 @@ public class UbicacionBus implements Serializable {
 
     @Override
     public String toString() {
-        return "UbicacionBus [patente=" + patente + ", latitud=" + latitud + ", longitud=" + longitud + "]";
+        return "UbicacionBus [id=" + id + ", accion=" + accion + ", patente=" + patente + "]";
     }
 }

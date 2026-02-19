@@ -13,15 +13,12 @@ public class GpsService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    // Usamos Jackson para convertir el objeto Java a JSON String
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void enviarUbicacion(UbicacionBus ubicacion) {
         try {
-            // Convertimos el objeto a JSON String
             String mensajeJson = objectMapper.writeValueAsString(ubicacion);
             
-            // Enviamos a la cola definida en la configuración
             rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_UBICACIONES, mensajeJson);
             
             System.out.println("Mensaje enviado a RabbitMQ: " + mensajeJson);

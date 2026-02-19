@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    // Define el nombre de la cola como constante
     public static final String QUEUE_UBICACIONES = "cola-ubicaciones";
 
     @Bean
